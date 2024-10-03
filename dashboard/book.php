@@ -1,12 +1,17 @@
 <?php
-include '../database/connection.php';
 
-// Fetch books from the database
-$sql = "SELECT b.booktitle, b.author, b.department, bf.filename, bf.filepath 
-        FROM books b 
-        LEFT JOIN bookfiles bf ON b.bookid = bf.bookid";
-$result = mysqli_query($conn, $sql);
+
+// File: book.php
+include '../database/connection.php';
+include '../classes/books.php';
+
+// Instantiate the Book class
+$book = new Book($conn);
+
+// Fetch books
+$books = $book->getBooks();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +57,7 @@ $result = mysqli_query($conn, $sql);
             flex-wrap: wrap;
             justify-content: space-between;
         }
-    </style>
+    </style> 
 </head>
 <body>
 
@@ -93,14 +98,14 @@ $result = mysqli_query($conn, $sql);
             <h2>Available Books</h2>
             <div class="card-container">
                 <?php
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
+                if ($books) {
+                    foreach ($books as $book) {
                         echo '<div class="card">';
-                        echo '<h3>' . htmlspecialchars($row['booktitle']) . '</h3>';
-                        echo '<p>Author: ' . htmlspecialchars($row['author']) . '</p>';
-                        echo '<p>Department: ' . htmlspecialchars($row['department']) . '</p>';
-                        if ($row['filename']) {
-                            echo '<p><a href="' . htmlspecialchars($row['filepath']) . '" target="_blank">' . htmlspecialchars($row['filename']) . '</a></p>';
+                        echo '<h3>' . htmlspecialchars($book['booktitle']) . '</h3>';
+                        echo '<p>Author: ' . htmlspecialchars($book['author']) . '</p>';
+                        echo '<p>Department: ' . htmlspecialchars($book['department']) . '</p>';
+                        if ($book['filename']) {
+                            echo '<p><a href="' . htmlspecialchars($book['filepath']) . '" target="_blank">Read Book</a></p>';
                         }
                         echo '</div>';
                     }
