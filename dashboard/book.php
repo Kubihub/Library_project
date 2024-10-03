@@ -19,45 +19,10 @@ $books = $book->getBooks();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GWL</title>
+    <link rel="stylesheet" href="../css/books.css">
     <link rel="stylesheet" href="../css/main.css">
     
-    <style>
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            padding: 15px;
-            width: calc(33.333% - 40px);
-            display: inline-block;
-            vertical-align: top;
-        }
-        .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .card h3 {
-            margin: 0 0 10px;
-            font-size: 1.2em;
-        }
-        .card p {
-            margin: 0;
-            color: #555;
-        }
-        .card a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .card a:hover {
-            text-decoration: underline;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-    </style> 
+    
 </head>
 <body>
 
