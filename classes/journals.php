@@ -1,6 +1,6 @@
 <?php
-// File: classes/Book.php
-class Book {
+// File: classes/Journal.php
+class Journal {
     private $conn;
 
     // Constructor to initialize the database connection
@@ -9,10 +9,12 @@ class Book {
     }
 
     // Function to fetch books from the database
-    public function getBooks() {
-        $sql = "SELECT b.booktitle, b.author, b.department, bf.filename, bf.filepath 
-                FROM books b 
-                LEFT JOIN bookfiles bf ON b.bookid = bf.bookid";
+    public function getJournals() {
+        $sql = "SELECT j.journaltitle, jf.filename, jf.filepath 
+                FROM journals j 
+                JOIN journalfiles jf ON j.journalid = jf.journalid 
+                ORDER BY jf.id DESC 
+                LIMIT 1";
 
         $result = mysqli_query($this->conn, $sql);
 
